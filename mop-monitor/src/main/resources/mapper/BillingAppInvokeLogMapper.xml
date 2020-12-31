@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.fdop.monitor.mapper.BillingAppInvokeLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.fdop.monitor.mode.entity.BillingAppInvokeLog" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="merchant_code" property="merchantCode" jdbcType="VARCHAR" />
+    <result column="invoke_type" property="invokeType" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="terminal" property="terminal" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="msgid" property="msgid" jdbcType="VARCHAR" />
+    <result column="app_name" property="appName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="request_status" property="requestStatus" jdbcType="INTEGER" />
+    <result column="response_code" property="responseCode" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="response_time" property="responseTime" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ${table}
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ai.fdop.monitor.mode.entity.BillingAppInvokeLog" >
+    insert into ${table} (ID, app_id, merchant_code,
+      invoke_type, ip, terminal, 
+      token, msgid, app_name, 
+      create_time, request_status, response_code, 
+      update_time, response_time)
+    values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=VARCHAR}, #{merchantCode,jdbcType=VARCHAR}, 
+      #{invokeType,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{terminal,jdbcType=INTEGER}, 
+      #{token,jdbcType=VARCHAR}, #{msgid,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=BIGINT}, #{requestStatus,jdbcType=INTEGER}, #{responseCode,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{responseTime,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ai.fdop.monitor.mode.entity.BillingAppInvokeLog" >
+    update ${table}
+    set app_id = #{appId,jdbcType=VARCHAR},
+      merchant_code = #{merchantCode,jdbcType=VARCHAR},
+      invoke_type = #{invokeType,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      terminal = #{terminal,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      msgid = #{msgid,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      request_status = #{requestStatus,jdbcType=INTEGER},
+      response_code = #{responseCode,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      response_time = #{responseTime,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select ID, app_id, merchant_code, invoke_type, ip, terminal, token, msgid, app_name, 
+    create_time, request_status, response_code, update_time, response_time
+    from ${table}
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, app_id, merchant_code, invoke_type, ip, terminal, token, msgid, app_name, 
+    create_time, request_status, response_code, update_time, response_time
+    from ${table}
+  </select>
+
+  <select id="queryWeekOutTimeData" resultType="com.ai.fdop.monitor.mode.vo.TimeOutVo">
+    SELECT
+    a.create_time ceateDate,count(1) total
+    FROM
+    (
+    SELECT
+    FROM_UNIXTIME(create_time / 1000, '%Y%m%d') create_time
+    FROM
+    ${table}
+    where
+    create_time >=  #{request.startDateL}
+    AND create_time &lt;  #{request.endDateL}
+    and response_time > #{request.outTime}
+    <if test="request.appId!=null">
+      app_id = #{request.appId}
+    </if>
+    ) a
+    group by   a.ceateDate
+  </select>
+
+  <select id="queryDayOutTimeData" resultType="com.ai.fdop.monitor.mode.vo.TimeOutVo">
+    SELECT
+    a.create_time ceateDate,count(1) total
+    FROM
+    (
+    SELECT
+    FROM_UNIXTIME(create_time / 1000, '%Y%m%d%H') create_time
+    FROM
+    ${table}
+    where
+    create_time >=  #{request.startDateL}
+    AND create_time &lt;  #{request.endDateL}
+    and response_time > #{request.outTime}
+    <if test="request.appId!=null">
+      app_id = #{request.appId}
+    </if>
+    ) a
+    group by   a.ceateDate
+  </select>
+</mapper>

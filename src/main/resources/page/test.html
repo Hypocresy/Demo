@@ -1,0 +1,36 @@
+
+<div id="aa" class="easyui-accordion" style="width:300px;height:200px;">
+    <div title="Title1"style="overflow:auto;padding:10px;">
+        <h3 style="color:#0099FF;">Accordion for jQuery</h3>
+        <p>Accordion is a part of easyui framework for jQuery.
+            It lets you define your accordion component on web page more easily.</p>
+    </div>
+    <div title="Title2" data-options="selected:true" style="padding:10px;">
+        content2
+    </div>
+    <div title="Title3">
+        <div id="acc0"></div>
+        <script>
+            $("#acc0").datagrid({
+                width:400,
+                height:200,
+                columns:[[{field:"项目名称",title:"项目名称",width:120},{field:"原型名",title:"量表名称",width:200}]],
+                data:[{"创建人ID":"00","原型名":"text","全文信息":"","状态":"1","SQL":"","修改人ID":"00","文档类型":"电子病历","机构ID":"01","文档格式":"1","类型ID":"01","全文信息打印":"","修改时间":"2020-09-01 18:30:58","创建时间":"2020-08-31 21:15:39","ID":"3F0F6A284BBF42ED94B86D4AED6E0F14","项目名称":"测试评估"},{"创建人ID":"00","原型名":"stest3","全文信息":"","状态":"9","SQL":"","修改人ID":"C32F984EC4354419889587F93538F7C1","文档类型":"电子病历","机构ID":"01","文档格式":"1","类型ID":"01","全文信息打印":"","修改时间":"2020-09-01 00:16:09","创建时间":"2020-08-31 23:41:47","ID":"8302BF9F0FAA44C890B122E67541037F","项目名称":"测试评估"}]})
+
+        </script>
+    </div>
+
+</div>
+
+<script>
+    $('#aa').accordion({ onSelect:function (title,index) {
+           if(title='Title3'){
+               console.log("选中");
+               $("#acc0").datagrid('resize');
+           }
+
+        }});
+</script>
+
+
+<a style='color: #0c80d7' class='tb执行' onclick='exec('NWMWZPLIBRUQKYQZZYMN20200908103356')'>执行</a>&nbsp;<a style='color: #0c80d7' class='tb报告'>报告</a>&nbsp;<a style='color: #0c80d7' class='tb完成'>完成</a>&nbsp;<a style='color: #0c80d7' class='tb管理医嘱'>管理医嘱</a>&nbsp;<a style='color: #0c80d7' class='更多'>更多</a>

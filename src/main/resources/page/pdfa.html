@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="../plugins/easyui/uimaker/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../plugins/easyui/uimaker/icon.css">
+    <script type="text/javascript" src="../plugins/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../plugins/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../plugins/easyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/base.js"></script>
+    <script type="text/javascript" src="/js/jserver.js"> </script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/pdfa.css">
+    <script src="../js/pdfa.js"></script>
+
+
+</head>
+<body>
+<div id="dialog">
+    <div style="width: 80%;height: 50px"></div>
+    <div id="d-title"><span>新建评定方案</span></div>
+    <div id="d-left" class="testll">
+        <div id="d-left-inner">
+            <div style="width: 3px;height: 16px;display: inline-block;background-color:#C1C1C1;position: relative;top:2px;z-index: -1"></div>
+            &nbsp;<span style="font-weight:bold;font-size: 14px;color: black">病人信息</span><br>
+            <div class="d-left-inner-div">
+                <label>姓名:</label> <input type="text" id="姓名" value="小白">
+                <label>性别:</label> <input type="text" id="性别" value="男">
+                <label>年龄:</label> <input type="text" id="年龄" value="99" style="width: 16px"><label>岁</label>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>就诊号:</label> <input type="text" id="就诊号" value="5465465465">
+            </div>
+            <div style="font-size: 12px" class="d-left-inner-div">
+                <label>类型:</label>（第 <input type="text" value="3" id="类型" style="width:14px">次） &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <label>床号:</label> <input type="text" id="床号" value="18">
+                <label>入院日期</label> <input type="text" id="入院日期" value="2019年12月12日 13时25分" style="width: 180px">
+            </div>
+            <div class="d-left-inner-div">
+                <label>就诊科室:</label> <input type="text" id="就诊科室" value="反射科">
+                <label>临床诊断:</label> <input type="text" id="临床诊断" value="癌症">
+            </div>
+
+        </div>
+        <br>
+        <div id="d-left-bottm">
+            <div style="width: 3px;height: 16px;display: inline-block;background-color:#C1C1C1;position: relative;top:2px;z-index: -1"></div>
+            &nbsp;<span style="font-weight:bold;font-size: 14px;color: black">评估信息</span><br>
+            <div class="d-left-inner-div" style="margin-top: 10px">
+                <label><span>*</span> 方案类型</label> <input type="text" id="方案类型" placeholder="请选择方案类型" required="required" >
+                <label><span>*</span> 方案名称</label> <input type="text" id="方案名称" class="easyui-textbox" placeholder="请输入方案名称" required="required" >
+                <label><span>*</span> 评定时间</label> <input type="text" id="评定时间"  class="easyui-datebox" required="required" >
+            </div>
+            <div class="d-left-inner-div" style="margin-top: 20px">
+                &nbsp; &nbsp; &nbsp; &nbsp; <label>目的</label> <input type="text" id="目的" class="easyui-textbox"
+                                                                     style="height: 20px;width: 500px"
+                                                                     placeholder="请输入目的">
+            </div>
+            <div class="d-left-inner-div" style="margin-top: 20px">
+                &nbsp; &nbsp; &nbsp; &nbsp; <label>医嘱</label> <input type="text" id="医嘱" placeholder="请选择医嘱">
+                <label>项目名称</label> <input type="text" id="项目名称" placeholder="请选择项目名称">
+                <button class="button" id="成员添加" style="height: 25px; margin-left: 30px;width: 80px">添加</button>
+            </div>
+            <div style="height: 10px;width: 20%"></div>
+            <div style="height: 120px;width: 712px;display: inline-block">
+                <!--                 zhil项目框选项框-->
+                <div id="project" style="display: inline-block"></div>
+            </div>
+            <div id="tb" style="margin-top: 10px">
+                <label></label>
+                <input id="query_id" class="easyui-textbox" style="width: 100px;">
+                <label ></label> <input type="text"  class="easyui-textbox"  id="findPro" style="width: 110px;">
+                <div style="display:inline-block"></div>
+                <a href="#" id="btn_query" class="easyui-linkbutton" style="height: 25px" iconCls="icon-search">查询</a>
+            </div>
+            <table align="center" style="border-spacing: 10px 30px;margin-left: -7px;margin-top: -20px">
+
+                <tr>
+                    <td>
+                        <div id="role_data1" style="display: inline-block" data-options= "toolbar:'#tb'"></div>
+                    </td>
+                    <td>
+                        <div id="role_data2" style="display: inline-block"></div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+
+    </div>
+
+<!--    div-right-->
+    <div id="d-right" class="testll" style="z-index: 1" >
+        <div id="d-right-top">
+            <div style="width: 3px;height: 16px;display: inline-block;background-color:#C1C1C1;position: relative;top:2px;z-index: -1"></div>
+            &nbsp;<span style="font-weight:bold;font-size: 14px;color: black">方案选择</span><br>
+            <div class="btn-group" style="width:100%;margin-top: 20px;margin-left: 10px">
+                <button id="now" onclick="programClick('d-right-center1')" style="width:120px;border-top-left-radius: 10px;border-bottom-left-radius: 10px;background-color: #27A9E3;color:white">当前方案</button>
+                <button id="future" onclick="programClick('d-right-center2')" style="width:120px">预设方案</button>
+                <button id="his" onclick="programClick('d-right-center3')" style="width:120px;border-top-right-radius: 10px;border-bottom-right-radius: 10px">历史方案</button>
+            </div>
+        </div>
+        <div id="d-right-center1" class="d-right-center" style="margin-top: 20px; ">
+            <div style="height: 40px">
+                <button class="button" id="saveTemplate" style="height: 25px; margin-left: 20px;width: 120px;float: right">保存为模板</button>
+            </div>
+            <div style="margin-top: 10px">
+                 <div id="project-right">
+
+                 </div>
+            </div>
+        </div>
+        <div id="d-right-center2" class="d-right-center" style="margin-top: 20px;display: none">
+            <input type="text" style="width: 240px;margin-left: 10px;padding-left: 5px;" placeholder="病种/方案; ">
+            <button class="button" id="querybz" style="height: 25px; width: 90px;float: right">查询</button>
+            <div style="height: 20px"></div>
+            <div style="color:#0099FF;">
+                预订方案共
+                <input type="text" style="width: 20px;border: 0px;color: #0099FF" value="24">个
+            </div>
+<!--            折叠板-->
+            <div id="future_panel" class="easyui-accordion"  data-options="selected:true" style="width:100%;height:500px;border: 0px">
+                <div title="Title1"    style="padding:10px;">
+                    <h3 style="color:#0099FF;">Accordion for jQuery</h3>
+                    <p>Accordion is a part of easyui framework for jQuery.
+                        It lets you define your accordion component on web page more easily.</p>
+                </div>
+                <div title="Title2"    style="padding:10px;">
+                    <h3 style="color:#0099FF;">Accordion for jQuery</h3>
+                    <p>Accordion is a part of easyui framework for jQuery.
+                        It lets you define your accordion component on web page more easily.</p>
+                </div>
+
+
+            </div>
+        </div>
+        <div id="d-right-center3" class="d-right-center" style="margin-top: 20px;display: none">
+            <div style="color:#0099FF;">
+                历史方案共
+                <input type="text" style="width: 20px;border: 0px;color: #0099FF" value="24">个
+            </div>
+            <!--            折叠板-->
+            <div id="his_panel" class="easyui-accordion"  data-options="selected:true" style="width:100%;height:500px;border: 0px">
+                <div title="Title1"    style="padding:10px;">
+                    <h3 style="color:#0099FF;">Accordion for jQuery</h3>
+                    <p>Accordion is a part of easyui framework for jQuery.
+                        It lets you define your accordion component on web page more easily.</p>
+                </div>
+                <div title="Title2"    style="padding:10px;">
+                    <h3 style="color:#0099FF;">Accordion for jQuery</h3>
+                    <p>Accordion is a part of easyui framework for jQuery.
+                        It lets you define your accordion component on web page more easily.</p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div style="height: 50px">
+
+        </div>
+    </div>
+</div>
+<iframe src="/demo/page/test.html" frameborder="0"></iframe>
+</body>
+</html>

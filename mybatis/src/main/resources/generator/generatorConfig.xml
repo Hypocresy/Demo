@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--<properties resource="application.properties"/>-->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.shanghai.sdkinterface.util.DNABaseMapper"/>
+        </plugin>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://10.19.13.51:3306/shanghai-dmp"
+                        userId="root"
+                        password="M^fKCszZ*j*tl#4#">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.shanghai.sdkinterface.model" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.shanghai.sdkinterface.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+        <!--<table tableName="billing_app_invoke_log"><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>-->
+        <!--<table tableName="billing_internet_invoke_log"><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>-->
+        <!--<table tableName="merchant"><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>-->
+        <!--<table tableName="merchant_channel"><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>-->
+        <!--<table tableName="merchant_app"><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>-->
+        <table tableName="merchant_business_permission"><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>
+    </context>
+</generatorConfiguration>

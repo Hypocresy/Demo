@@ -1,0 +1,18 @@
+<div style="float: left;width: 200px" id="视频-div-0">
+    <table id="量表-视频0" style="width: 100%;" class="easyui-datagrid"
+           data-options=" rownumbers:false,singleSelect:true,fitColumns:true,scrollbarSize:0,fitColumns:true">
+        <thead>
+        <th data-options="field:'VALUE',align:'center',width:200,formatter:shipiny">初级评定方案-20201019</th>
+        <th data-options="field:'ID',width:210,align:'center',hidden:true">ID</th>
+        </thead>
+    </table>
+</div>
+<script>  var rows = $('#pdgzz量表分值table').datagrid('getRows');
+var arritem = [];
+$.each(rows, function (ind, val) {
+    var yyy = {value: 1};
+    arritem.push(yyy);
+});
+$('#量表-视频0').datagrid('loadData', arritem);
+$('#视频-div-0').show();
+$('#量表-视频0').datagrid('resize');</script>
