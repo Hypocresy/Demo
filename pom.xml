@@ -23,6 +23,9 @@
     <modules>
         <module>mq-demo</module>
         <module>mybatis</module>
+        <module>expame-demo</module>
+        <module>redis-utlis</module>
+        <module>class-loader</module>
     </modules>
     <dependencies>
         <dependency>
