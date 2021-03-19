@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ai.fdop.monitor.mapper.BillingAppInvokeLogMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.fdop.monitor.mode.entity.BillingAppInvokeLog" >
+  <resultMap id="BaseResultMap" type="com.ai.fdop.monitor.com.hy.demo.mode.entity.BillingAppInvokeLog" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="app_id" property="appId" jdbcType="VARCHAR" />
     <result column="merchant_code" property="merchantCode" jdbcType="VARCHAR" />
@@ -21,7 +21,7 @@
     delete from ${table}
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ai.fdop.monitor.mode.entity.BillingAppInvokeLog" >
+  <insert id="insert" parameterType="com.ai.fdop.monitor.com.hy.demo.mode.entity.BillingAppInvokeLog" >
     insert into ${table} (ID, app_id, merchant_code,
       invoke_type, ip, terminal, 
       token, msgid, app_name, 
@@ -33,7 +33,7 @@
       #{createTime,jdbcType=BIGINT}, #{requestStatus,jdbcType=INTEGER}, #{responseCode,jdbcType=INTEGER}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{responseTime,jdbcType=INTEGER})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.ai.fdop.monitor.mode.entity.BillingAppInvokeLog" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.fdop.monitor.com.hy.demo.mode.entity.BillingAppInvokeLog" >
     update ${table}
     set app_id = #{appId,jdbcType=VARCHAR},
       merchant_code = #{merchantCode,jdbcType=VARCHAR},
@@ -62,7 +62,7 @@
     from ${table}
   </select>
 
-  <select id="queryWeekOutTimeData" resultType="com.ai.fdop.monitor.mode.vo.TimeOutVo">
+  <select id="queryWeekOutTimeData" resultType="com.ai.fdop.monitor.com.hy.demo.mode.vo.TimeOutVo">
     SELECT
     a.create_time ceateDate,count(1) total
     FROM
@@ -82,7 +82,7 @@
     group by   a.ceateDate
   </select>
 
-  <select id="queryDayOutTimeData" resultType="com.ai.fdop.monitor.mode.vo.TimeOutVo">
+  <select id="queryDayOutTimeData" resultType="com.ai.fdop.monitor.com.hy.demo.mode.vo.TimeOutVo">
     SELECT
     a.create_time ceateDate,count(1) total
     FROM

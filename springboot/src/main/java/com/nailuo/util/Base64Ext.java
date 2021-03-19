@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.hy.redis.utils.redisson.other.util;
+package com.nailuo.util;
 
 import java.io.UnsupportedEncodingException;
 

@@ -12,6 +12,7 @@ import com.ai.fdop.monitor.mode.http.DataRequest;
 import com.ai.fdop.monitor.mode.vo.TimeOutVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -30,7 +31,7 @@ import java.util.*;
 public class DataSupportService {
     @Autowired
     private BillingAppInvokeLogMapper billingAppInvokeLogMapper;
-
+    private RedisTemplate redisTemplate;
 
     private SimpleDateFormat dsdf = new SimpleDateFormat("yyyyMMdd");
     private SimpleDateFormat hsdf= new SimpleDateFormat("yyyyMMddhh");
@@ -94,6 +95,10 @@ public class DataSupportService {
 
 
     private void dataPadding(ArrayList<TimeOutVo> internetOutItemList, ArrayList<Integer> internetOutTimeList, String item) {
+
+
+
+
         if(internetOutItemList.size()>0){
             internetOutItemList.stream().forEach(obj->{
                 if(obj.getCeateDate().equals(item)){
@@ -105,6 +110,7 @@ public class DataSupportService {
         }else {
             internetOutTimeList.add(0);
         }
+
     }
 
     /**

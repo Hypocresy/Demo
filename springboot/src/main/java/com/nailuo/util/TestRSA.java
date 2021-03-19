@@ -1,7 +1,6 @@
-package com.cmcc.fdop.util;
+package com.nailuo.util;
 
-import android.os.Build;
-import android.text.TextUtils;
+
 
 import java.io.UnsupportedEncodingException;
 import java.security.KeyFactory;
@@ -449,9 +448,7 @@ public class TestRSA {
     public static String generalSign(byte[] data, String privateKeyStr) {
         Signature signature;
         try {
-            if (TextUtils.isEmpty(privateKeyStr)) {
-                return null;
-            }
+
             //生成签名
             RSAPrivateKey privateKey = getprivateKeyBykey(privateKeyStr);
             signature = Signature.getInstance(SIGNATURE_ALGORITHM);

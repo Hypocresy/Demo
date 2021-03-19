@@ -1,6 +1,7 @@
 package com.nailuo.contorller;
 
 
+import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +30,7 @@ import java.util.List;
  * @blame Development Group
  * @date 2020/11/26 11:54
  * @since 0.0.1
- * 即使你忘记了我，我也不会遗忘你
+ *
  */
 @RestController
 public class WebContorller {
@@ -47,7 +49,6 @@ public class WebContorller {
        requestEntyity.init();
        HashMap<String, Object> entity = requestEntyity.getEntity();
        entity.put("request",request);
-       System.out.println(JSONObject.toJSON(entity));
        String url = environment.getProperty("target.url");
        url = url+api;
        HttpHeaders headers = new HttpHeaders();
@@ -57,20 +58,28 @@ public class WebContorller {
        HttpEntity<String> entitys = new HttpEntity<>(JSONObject.toJSONString(jsonObj), headers);
        ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entitys, String.class);
        String body = responseEntity.getBody();
-       System.out.println(body);
-       JSONObject bean = JSONUtil.toBean(body, JSONObject.class);
        HashMap hashMap = JSONArray.parseObject(body, HashMap.class);
        System.out.println(JSONObject.toJSONString(hashMap));
-       String response = hashMap.get("response").toString();
-       System.out.println("response:"+response);
+      JSONObject head = JSONObject.parseObject(hashMap.get("head").toString());
+      if(!"0000".equals(head.getString("responseCode"))){
+         System.out.println("失败");
+         return head;
+      }
+      String response = hashMap.get("response").toString();
+      System.out.println("response:"+response);
        String decode = SM4Util.decode(response, secreKey);
-//       System.out.println("decode:"+decode);
-//       JSONObject jsonObject = JSONObject.parseObject(decode);
-//       String tags = (String) jsonObject.get("tags");
-//       tags = tags.replaceAll("\\\\", "");
-//       JSONArray objects = JSONArray.parseArray(tags);
 
        return decode;
     }
+
+   @RequestMapping("getip")
+   public void ipRoute(HttpServletRequest request){
+      String clientIP = ServletUtil.getClientIP(request);
+      // hutools
+      System.out.println("clientIP》》》》》》》 "+clientIP);
+      System.out.println("getRemoteHost>>>>"+request.getRemoteHost());
+      System.out.println("getRemoteAddr>>>>"+request.getRemoteAddr());
+
+   }
 
 }

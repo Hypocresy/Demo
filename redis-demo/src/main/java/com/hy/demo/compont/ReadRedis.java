@@ -1,11 +1,25 @@
 package com.hy.demo.compont;
 
-/**
- * @author hy
- * @blame Development Group
- * @date 2021/1/27 9:45
- * @since 0.0.1
- * 世界上并没有完美的程序，但我们并不因此而沮丧，因为写程序本来就是一个不断追求完美的过程。
- */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
+import com.hy.demo.entity.MerchantApp;
+@Component
 public class ReadRedis {
+    @Autowired
+    private RedisTemplate redisTemplate;
+    public void read(){
+        ValueOperations<String,MerchantApp> ops = redisTemplate.opsForValue();
+        MerchantApp name = ops.get("name");
+//        Gson gson = new Gson();
+//        MerchantApp name = gson.fromJson(ops.get("name"), MerchantApp.class);
+//        MerchantApp name = JSONObject.parseObject(ops.get("name"),MerchantApp.class);
+//        if(name==null){
+//            System.out.println("读： "+JSONArray.toJSONString(name));
+//        }
+//        System.out.println("读： "+JSONArray.toJSONString(name));
+
+    }
 }

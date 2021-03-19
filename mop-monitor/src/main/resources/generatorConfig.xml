@@ -61,7 +61,7 @@
         targetProject:把自动生成的domian放在哪个工程里面
         targetPackage:哪个包下
         -->
-        <javaModelGenerator targetPackage="com.ai.fdop.monitor.mode.entity"
+        <javaModelGenerator targetPackage="com.ai.fdop.monitor.com.hy.demo.mode.entity"
                             targetProject="src/main/java">
             <!-- for MyBatis3/MyBatis3Simple
             自动为每一个生成的类创建一个构造方法，
