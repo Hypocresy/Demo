@@ -2,6 +2,7 @@ package cn.hy.security.service;
 
 import cn.hy.security.dao.UserDao;
 import cn.hy.security.entity.User;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserDetailsService {
         if(users.size()>1||users.size()==0){
              throw new  UsernameNotFoundException("用户不存在或存在多条记录");
         }
+        User dasda = JSONObject.parseObject("dasda", User.class);
         return quser;
     }
 }
