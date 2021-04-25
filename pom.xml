@@ -33,6 +33,7 @@
         <module>spring-security-demo</module>
         <module>demo-hodp</module>
         <module>demo-mybatis-plus</module>
+        <module>netty-demo</module>
     </modules>
 
 <dependencyManagement>

@@ -1,7 +1,6 @@
 package src.main.java.com.hy.demo;
 
-import com.xiaoleilu.hutool.codec.Base64;
-import com.xiaoleilu.hutool.util.ImageUtil;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.junit.Test;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

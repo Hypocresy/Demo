@@ -25,6 +25,7 @@ public class HttpRequest {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddmmss");
 
     public void init(){
+        // 请求头处理
         String secretId = environment.getProperty("secretId");
         String secreKey = environment.getProperty("secreKey");
         HashMap<String, String> interHash = new HashMap<>(32);

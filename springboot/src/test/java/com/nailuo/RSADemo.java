@@ -17,9 +17,8 @@ public class RSADemo {
     public static void main(String[] args) throws NoSuchAlgorithmException {
 
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-//        keyGen.initialize(2048);
+        keyGen.initialize(1024);
         KeyPair pair = keyGen.generateKeyPair();
-
         byte[] publicBytes = pair.getPublic().getEncoded();
         byte[] privateBytes = pair.getPrivate().getEncoded();
 

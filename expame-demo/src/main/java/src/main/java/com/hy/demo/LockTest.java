@@ -1,9 +1,7 @@
 package src.main.java.com.hy.demo;
 
-import com.xiaoleilu.hutool.json.JSONUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
+
 import org.junit.Test;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;

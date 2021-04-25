@@ -6,6 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import com.nailuo.util.RateLimiterAn;
 import com.nailuo.util.SM4Util;
 import com.nailuo.vo.HttpRequest;
 
@@ -42,13 +43,17 @@ public class WebContorller {
    private RestTemplate restTemplate;
 
    @RequestMapping("/openapi/queryData/{api}")
+   @RateLimiterAn(value = 50,timeout = 60)
     public Object  res(@RequestBody JSONObject object, @PathVariable("api") String api) throws Exception {
        String param = JSONObject.toJSONString(object);
+       //获取加密 密匙
        String secreKey = environment.getProperty("secreKey");
        String request = SM4Util.encode(param, secreKey);
+       //设置请求头
        requestEntyity.init();
        HashMap<String, Object> entity = requestEntyity.getEntity();
        entity.put("request",request);
+       //拼接请求路径
        String url = environment.getProperty("target.url");
        url = url+api;
        HttpHeaders headers = new HttpHeaders();
@@ -72,14 +77,5 @@ public class WebContorller {
        return decode;
     }
 
-   @RequestMapping("getip")
-   public void ipRoute(HttpServletRequest request){
-      String clientIP = ServletUtil.getClientIP(request);
-      // hutools
-      System.out.println("clientIP》》》》》》》 "+clientIP);
-      System.out.println("getRemoteHost>>>>"+request.getRemoteHost());
-      System.out.println("getRemoteAddr>>>>"+request.getRemoteAddr());
-
-   }
 
 }
